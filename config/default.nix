@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 { imports = [
 		# Base settings
 		./autocommands.nix
@@ -13,8 +13,10 @@
 		./plug/lsp/lspsaga.nix
 		./plug/lsp/clangd-extensions.nix
 		./plug/lsp/none-ls.nix
+		./plug/lsp/rustaceanvim.nix
 		# Git integration
 		./plug/git/gitsigns.nix
+		./plug/git/codediff.nix
 		# Statusline
 		./plug/statusline/lualine.nix
 		# Treesitter
@@ -22,19 +24,17 @@
 		./plug/treesitter/treesitter-textobjects.nix
 		./plug/treesitter/treesitter.nix
 		# UI Enhancements
-		./plug/ui/smear.nix
 		./plug/ui/web-devicons.nix
 		./plug/ui/bufferline.nix
 		./plug/ui/noice.nix
-		./plug/ui/illuminate.nix
 		./plug/ui/markview.nix
 		./plug/ui/ufo.nix
 		./plug/ui/dap-ui.nix
 		./plug/ui/dap-virtual-text.nix
+		./plug/ui/colorizer.nix
 		# Utility Plugins
 		./plug/utils/dap.nix
 		./plug/utils/lz-n.nix
-		./plug/utils/sleuth.nix
 		./plug/utils/smart-splits.nix
 		./plug/utils/comment.nix
 		./plug/utils/trouble.nix
@@ -43,7 +43,8 @@
 		./plug/utils/undotree.nix
 		./plug/utils/compile.nix
 		./plug/utils/todo-comments.nix
-		
+		./plug/utils/peristence.nix
+
 		./plug/snacks/default.nix
 		./plug/mini/default.nix
 	];
@@ -55,6 +56,7 @@
 				"paradise"
 				"poimandres"
 				"oxocarbon"
+				"zen"
 			];
 		};
 	};
@@ -62,7 +64,7 @@
 	config = {
 		theme = "paradise";
 		extraConfigLua = ''
-	  _G.theme = "${config.theme}"
-	  '';
+			_G.theme = "${config.theme}"
+		'';
 	};
 }

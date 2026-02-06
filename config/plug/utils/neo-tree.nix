@@ -2,11 +2,14 @@
 	plugins.neo-tree = {
 		enable = true;
 		settings = {
-			enable_git_status = false;
-			follow_current_file = {
-				enabled = true;
-				leave_dirs_open = true;
+			close_if_last_window = true;
+			filesystem = {
+				follow_current_file = {
+					enabled = true;
+					leave_dirs_open = true;
+				};
 			};
+			enable_git_status = false;
 			window.position = "left";
 			window.width = 30;
 			buffers.window.mappings = {

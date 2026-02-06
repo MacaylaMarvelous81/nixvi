@@ -2,7 +2,7 @@
 {
 	plugins.treesitter = {
 		enable = true;
-		folding = true;
+		folding.enable = true;
 		settings = {
 			indent = {
 				enable = true;
@@ -12,6 +12,7 @@
 			};
 			ensureInstalled = [
 				"c"
+				"rust"
 				"make"
 				"bash"
 				"diff"
@@ -23,11 +24,13 @@
 				"markdown"
 				"markdown_inline"
 				"doxygen"
+				"regex"
 			];
 		};
 
 		grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
 			c
+			rust
 			make
 			bash
 			diff
@@ -39,6 +42,7 @@
 			markdown
 			markdown_inline
 			doxygen
+			regex
 		];
 	};
 

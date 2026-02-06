@@ -24,7 +24,7 @@
 			timeout_normal = 200,
 		},
 		cmds = {
-			default = "make",
+			default = "make -B"
 		},
 		patterns = {
 			-- A table of patterns to match compiler output. This is how the plugin finds

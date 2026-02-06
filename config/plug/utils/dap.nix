@@ -166,30 +166,30 @@
 		    '';
 
 		    codelldb-config = {
-			inherit program;
-			name = "Launch (CodeLLDB)";
-			type = "codelldb";
-			request = "launch";
-			cwd = ''''${workspaceFolder}'';
-			stopOnEntry = false;
+				inherit program;
+				name = "Launch (CodeLLDB)";
+				type = "codelldb";
+				request = "launch";
+				cwd = ''''${workspaceFolder}'';
+				stopOnEntry = false;
 		    };
 
 		    gdb-config = {
-			inherit program;
-			name = "Launch (GDB)";
-			type = "gdb";
-			request = "launch";
-			cwd = ''''${workspaceFolder}'';
-			stopOnEntry = false;
+				inherit program;
+				name = "Launch (GDB)";
+				type = "gdb";
+				request = "launch";
+				cwd = ''''${workspaceFolder}'';
+				stopOnEntry = false;
 		    };
 
 		    lldb-config = {
-			inherit program;
-			name = "Launch (LLDB)";
-			type = "lldb";
-			request = "launch";
-			cwd = ''''${workspaceFolder}'';
-			stopOnEntry = false;
+				inherit program;
+				name = "Launch (LLDB)";
+				type = "lldb";
+				request = "launch";
+				cwd = ''''${workspaceFolder}'';
+				stopOnEntry = false;
 		    };
 		in
 		    {
@@ -220,26 +220,26 @@
 		};
 
 	    signs = {
-		dapBreakpoint = {
-		    text = "";
-		    texthl = "DapBreakpoint";
-		};
-		dapBreakpointCondition = {
-		    text = "";
-		    texthl = "DapBreakpointCondition";
-		};
-		dapBreakpointRejected = {
-		    text = "";
-		    texthl = "DapBreakpointRejected";
-		};
-		dapLogPoint = {
-		    text = "";
-		    texthl = "DapLogPoint";
-		};
-		dapStopped = {
-		    text = "";
-		    texthl = "DapStopped";
-		};
+			dapBreakpoint = {
+				text = "";
+				texthl = "DapBreakpoint";
+			};
+			dapBreakpointCondition = {
+				text = "";
+				texthl = "DapBreakpointCondition";
+			};
+			dapBreakpointRejected = {
+				text = "";
+				texthl = "DapBreakpointRejected";
+			};
+			dapLogPoint = {
+				text = "";
+				texthl = "DapLogPoint";
+			};
+			dapStopped = {
+				text = "";
+				texthl = "DapStopped";
+			};
 	    };
 	};
 };

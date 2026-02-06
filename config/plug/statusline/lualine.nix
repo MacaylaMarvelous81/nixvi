@@ -32,7 +32,17 @@ in
 						"dashboard"
 						"alpha"
 						"starter"
+						"dap-repl"
+						"dapui_scopes"
+						"dapui_stacks"
+						"dapui_watches"
+						"dapui_repl"
+						"LspTrouble"
+						"qf"
+						"NvimTree"
+						"dashboard"
 					];
+					winbar = ["*"];
 				};
 			};
 			inactive_sections = {
@@ -184,6 +194,10 @@ in
 					}
 				];
 			};
+			extensions = [
+				"nvim-dap-ui"
+				"symbols-outline"
+			];
 		};
 	};
 }

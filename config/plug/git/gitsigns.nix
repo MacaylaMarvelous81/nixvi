@@ -49,15 +49,15 @@
 				desc = "Blame line";
 			};
 		}
-		{
-			mode = "n";
-			key = "<leader>ghd";
-			action = ":Gitsigns diffthis<CR>";
-			options = {
-				silent = true;
-				desc = "Diff This";
-			};
-		}
+		#{
+		#	mode = "n";
+		#	key = "<leader>ghd";
+		#	action = ":Gitsigns diffthis<CR>";
+		#	options = {
+		#		silent = true;
+		#		desc = "Diff This";
+		#	};
+		#}
 		{
 			mode = "n";
 			key = "<leader>ghR";

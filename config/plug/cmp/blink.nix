@@ -15,7 +15,17 @@
 			setupLspCapabilities = true;
 			settings = {
 				keymap = {
-					preset = "super-tab";
+					preset = "none";
+					"<C-space>" = [ "show" "show_documentation" "hide_documentation" ];
+					"<C-e>" = [ "hide" "fallback" ];
+					"<CR>" = [ "accept" "fallback" ];
+					"<Tab>" = [ "accept" "snippet_forward" "fallback" ];
+					"<S-Tab>" = [ "snippet_backward" "fallback" ];
+					"<C-b>" = [ "scroll_documentation_up" "fallback" ];
+					"<C-f>" = [ "scroll_documentation_down" "fallback" ];
+					"<C-k>" = [ "show_signature" "hide_signature" "fallback" ];
+					"<Up>" = [ "select_prev" "fallback" ];
+					"<Down>" = [ "select_next" "fallback" ];
 				};
 				signature = {
 					enabled = true;
@@ -25,44 +35,56 @@
 					default = [
 						"lsp" "buffer" "path" "snippets"
 						# Community
-						"dictionary" "emoji" /*"git"*/"spell" "ripgrep"
+						"dictionary" "emoji" "git" "spell" "ripgrep"
 					];
 					providers = {
 						lsp = {
 							name = "lsp";
 							enabled = true;
 							module = "blink.cmp.sources.lsp";
+							score_offset = 10000;
+						};
+						ripgrep = {
+							name = "Ripgrep";
+							enabled = true;
+							module = "blink-ripgrep";
+							score_offset = 2000;
+						};
+						path = {
+							name = "Path";
+							enabled = true;
+							module = "blink.cmp.sources.path";
+							score_offset = 1500;
+						};
+						snippets = {
+							name = "Snippets";
+							module = "blink.cmp.sources.snippets";
 							score_offset = 1000;
 						};
 						dictionary = {
 							name = "Dict";
 							enabled = true;
 							module = "blink-cmp-dictionary";
-							min_keyword_length = 950;
+							min_keyword_length = 20;
 						};
-						ripgrep = {
-							name = "Ripgrep";
-							enabled = true;
-							module = "blink-ripgrep";
-							score_offset = 900;
-						};
-						/*git = {
+						git = {
 							module = "blink-cmp-git";
 							enabled = true;
 							name = "git";
-							score_offset = 100;
+							score_offset = 10;
 							opts = {
 								commit = { };
 								git_centers = {
 									git_hub = { };
+									git_lab = { };
 								};
 							};
-						};*/
+						};
 						spell = {
 							name = "Spell";
 							enabled = true;
 							module = "blink-cmp-spell";
-							score_offset = 50;
+							score_offset = 5;
 						};
 						emoji = {
 							name = "Emoji";
@@ -115,6 +137,11 @@
 					};
 				};
 				completion = {
+					ghost_text.enabled = true;
+					list.selection = {
+						preselect = true; 
+						auto_insert = false;
+					};
 					menu = {
 						border = "none";
 						draw = {
@@ -139,13 +166,13 @@
 					documentation = {
 						auto_show = true;
 						window = {
-							border = "single";
+							border = "rounded";
 						};
-						auto_show_delay_ms = 10;
+						auto_show_delay_ms = 50;
 					};
 					accept = {
 						auto_brackets = {
-							enabled = false;
+							enabled = true;
 						};
 					};
 				};

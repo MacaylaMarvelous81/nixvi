@@ -19,6 +19,30 @@
 			jump = {
 				severity.__raw = "vim.diagnostic.severity.ERROR";
 			};
+			virtual_text = {
+				prefix.__raw = ''
+				  function(diagnostic)
+					  local icons = {
+						  [vim.diagnostic.severity.ERROR] = " ",
+						  [vim.diagnostic.severity.WARN]  = " ",
+						  [vim.diagnostic.severity.HINT]  = "󰌵 ",
+						  [vim.diagnostic.severity.INFO]  = " ",
+					  }
+					  return icons[diagnostic.severity]
+				  end
+				 '';
+				spacing = 1;
+			};
+			signs = {
+				text.__raw = ''
+					{
+						[vim.diagnostic.severity.ERROR] = " ",
+						[vim.diagnostic.severity.WARN]  = " ",
+						[vim.diagnostic.severity.HINT]  = "󰌵 ",
+						[vim.diagnostic.severity.INFO]  = " ",
+					}
+				'';
+			};
 		};
 		opts = {
 			# Enable relative line numbers
@@ -26,8 +50,8 @@
 			relativenumber = true;
 
 			# Set tabs to 8 chars
-			tabstop = 8;
-			shiftwidth = 8;
+			tabstop = 4;
+			shiftwidth = 4;
 			softtabstop = 0;
 			expandtab = false;
 
@@ -52,6 +76,11 @@
 			# Enable mouse mode
 			mouse = "a"; # Mouse
 
+			confirm = true; # asks for confirmation instead of giving errors (e.g., on quitting without saving)
+			mousemoveevent = true; # allows mouse hover to be detected
+			#pumblend = 10; # popups transparency
+			#winblend = 10; # floating windows transparency
+
 			# Enable ignorecase + smartcase for better searching
 			ignorecase = true;
 			smartcase = true; # Don't ignore case with capitals
@@ -59,7 +88,7 @@
 			grepformat = "%f:%l:%c:%m";
 
 			# Decrease updatetime
-			updatetime = 50; # faster completion (4000ms default)
+			updatetime = 300; # faster completion (4000ms default)
 
 			# Set completeopt to have a better completion experience
 			completeopt = [
@@ -98,9 +127,9 @@
 			scrolloff = 10;
 
 			# Place a column line
-			colorcolumn = "120";
+			colorcolumn = "105";
 
-			# Reduce which-key timeout to 10ms
+			# Reduce timeout to 10ms
 			timeoutlen = 10;
 
 			# Set encoding type
@@ -117,7 +146,9 @@
 			spelllang = "en_us";
 			spell = false;
 			# Clipboard provider
-			#clipboard.providers.wl-copy.enable = true;
+			clipboard.providers.wl-copy.enable = true;
+			#clipboard = "unnamedplus";
+
 			list = true;
 			listchars = {
 				tab = " ";
@@ -125,6 +156,13 @@
 				extends = "»";
 				precedes = "«";
 				nbsp = "·";
+			};
+			fillchars = {
+				fold = " ";
+				foldopen = " ";
+				foldsep = " ";
+				foldclose = " ";
+				eob = "~";
 			};
 		};
 	};

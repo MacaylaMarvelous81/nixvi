@@ -75,12 +75,12 @@ in
 				bg = "none";
 			};
 			FloatBorder = {
-				fg = colors.base01;
-				bg = colors.base01;
+				fg = "none";
+				bg = colors.base00;
 			};
 			NormalFloat = {
 				fg = "none";
-				bg = colors.base01;
+				bg = colors.base00;
 			};
 
 			LineNr = {

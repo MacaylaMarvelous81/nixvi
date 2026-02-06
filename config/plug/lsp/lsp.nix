@@ -41,22 +41,22 @@
 						};
 					};
 				};
-				rust_analyzer = {
-					enable = false;
-					installRustc = false;
-					installCargo = false;
-				};
-				#cmake = {
-				#	enable = false;
-				#};
-				#dts_lsp = {
-				#	enable = false;
-				#	package = null;
-				#};
-				#bashls = {
-				#	enable = true;
-				#	autostart = false;
-				#};
+				#				rust_analyzer = {
+				#					enable = true;
+				#					installRustc = false;
+				#					installCargo = false;
+				#				};
+				#				cmake = {
+				#					enable = false;
+				#				};
+				#				dts_lsp = {
+				#					enable = false;
+				#					package = null;
+				#				};
+				#				bashls = {
+				#					enable = true;
+				#					autostart = false;
+				#				};
 			};
 			keymaps = {
 				silent = true;

@@ -1,20 +1,34 @@
 { pkgs, ... }:
 {
-  extraPackages = with pkgs; [ lazygit ];
+	extraPackages = with pkgs; [ lazygit ];
 
-  plugins.snacks = {
-    settings = {
-      lazygit.enabled = true;
-    };
-  };
-  keymaps = [
-    {
-      mode = "n";
-      key = "<leader>gg";
-      action = ":lua Snacks.lazygit.open()<CR>";
-      options = {
-        desc = "Open LazyGit";
-      };
-    }
-  ];
+	plugins.snacks = {
+		settings = {
+			lazygit.enabled = true;
+			win = {
+				style = "lazygit";
+				wo = {
+					winhighlight = "NormalFloat:Normal,FloatBorder:Normal";
+				};
+			};
+			theme = {
+				activeBorderColor    = { fg = "String"; bold = true; };
+				defaultFgColor       = { fg = "Normal"; };
+				inactiveBorderColor  = { fg = "#E8E3E3"; };
+				optionsTextColor     = { fg = "Function"; };
+				selectedLineBgColor  = { bg = "CursorLine"; };
+				unstagedChangesColor = { fg = "DiagnosticError"; };
+			};
+		};
+	};
+	keymaps = [
+	{
+		mode = "n";
+		key = "<leader>gg";
+		action = ":lua Snacks.lazygit.open()<CR>";
+		options = {
+			desc = "Open LazyGit";
+		};
+	}
+	];
 }

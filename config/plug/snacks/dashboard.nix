@@ -35,6 +35,18 @@ in
 							action = ":ene | startinsert";
 						}
 						{
+							icon = " ";
+							key = "p";
+							desc = "Projects";
+							action = ":lua Snacks.picker.projects()";
+						}
+						{
+							icon = " ";
+							key = "s";
+							desc = "Restore Session";
+							action = ":lua require('persistence').load()";
+						}
+						{
 							icon = " ";
 							key = "/";
 							desc = "Find Text";

@@ -3,6 +3,10 @@
 	keymaps = [
 		# General
 		{
+			mode = "n"; key = "gx"; action = ":lua OpenUnderCursor()<cr>";
+			options = { desc = "Open URL under cursor"; noremap = true; silent = true; };
+		}
+		{
 			mode = "n"; key = "<leader>cs"; action = ":ClangdSwitchSourceHeader<cr>";
 			options = { noremap = true; desc = "Switch source/header"; };
 		}
@@ -19,6 +23,10 @@
 			options = { silent = true; desc = "Show Conversions"; };
 		}
 		{
+			mode = [ "n" "v" ]; key = "<leader>ch"; action = ":lua ToggleHex()<cr>";
+			options = { silent = true; desc = "Toggle hex view"; };
+		}
+		{
 			mode = "n"; key = "<leader>ul"; action = ":lua ToggleLineNumber()<cr>";
 			options = { silent = true; desc = "Toggle Line Numbers"; };
 		}
@@ -30,10 +38,34 @@
 			mode = "n"; key = "<leader>uw"; action = ":lua ToggleWrap()<cr>";
 			options = { silent = true; desc = "Toggle Line Wrap"; };
 		}
+		{
+			mode = "n"; key = "<leader>uv";
+			action.__raw = ''
+				  function()
+					  local config = vim.diagnostic.config()
+					  -- If virtual text is currently enabled (it will be a table or true)
+					  if config.virtual_text then
+						  -- Cache the current custom config (so we don't lose the icons/prefix)
+						  _G.diagnostic_vt_cache = config.virtual_text
+						  vim.diagnostic.config({ virtual_text = false })
+						  vim.notify("Virtual Text: OFF", vim.log.levels.INFO)
+					  else
+						  -- Restore the cached config, or default to true if nothing cached
+						  vim.diagnostic.config({ virtual_text = _G.diagnostic_vt_cache or true })
+						  vim.notify("Virtual Text: ON", vim.log.levels.INFO)
+					  end
+				  end
+			'';
+			options = { desc = "Toggle Virtual Text (Diagnostics)"; silent = true; };
+		}
 
 		{
 			mode = "n"; key = "<leader>ci"; action = ":lua toggleInlayHints()<cr>";
 			options = { silent = true; desc = "Toggle inlay hints"; };
+		}
+		{
+			mode ="n"; key = "<leader>cz"; action = ":let &foldcolumn = (&foldcolumn == 0 ? 8 : 0)<CR>";
+			options = { silent = true; desc = "Toggle zen-mode"; };
 		}
 		{
 			mode = "v"; key = "J"; action = ":m '>+1<cr>gv=gv";
@@ -297,5 +329,70 @@
 			end
 		end, {buffer = bufnr})
 	end
+
+	function OpenUnderCursor()
+		local url = vim.fn.expand("<cfile>")
+		if url == "" then
+			vim.notify("No URL/file found under cursor", vim.log.levels.WARN)
+			return
+		end
+
+		local opener = "xdg-open"
+
+		vim.notify("Opened URL in browser", vim.log.levels.INFO)
+		vim.system({opener, url}, { detach = true })
+	end
+
+	function ToggleHex()
+		-- Save state (modified, readonly, modifiable)
+		local modified = vim.bo.modified
+		local old_readonly = vim.bo.readonly
+		local old_modifiable = vim.bo.modifiable
+		-- Prepare buffer for operations
+		vim.bo.readonly = false
+		vim.bo.modifiable = true
+
+		if not vim.b.editHex then
+		-- === ENTER HEX MODE ===
+		-- Save old options to buffer variables
+		vim.b.old_ft = vim.bo.filetype
+		vim.b.old_bin = vim.bo.binary
+		-- Set binary to ensure no newline conversion happens
+		vim.opt_local.binary = true
+		-- Reload the file to read raw bytes from disk (prevents EOL corruption)
+		-- We wrap this in pcall to catch "No write since last change" errors
+		local status, _ = pcall(vim.cmd, "silent e")
+		if not status then
+			print("❌ Error: Save changes before toggling Hex Mode!")
+			-- Restore settings on failure
+			vim.bo.readonly = old_readonly
+			vim.bo.modifiable = old_modifiable
+			if not vim.b.old_bin then vim.opt_local.binary = false end
+			return
+			end
+			-- Configure buffer for Hex editing
+			vim.bo.filetype = "xxd"
+			vim.b.editHex = true
+			-- Filter the buffer through xxd
+			vim.cmd("%!xxd")
+		else
+			-- === EXIT HEX MODE ===
+			-- Restore filetype
+			if vim.b.old_ft then 
+			vim.bo.filetype = vim.b.old_ft 
+			end
+			-- Restore binary setting
+			if not vim.b.old_bin then
+			vim.opt_local.binary = false
+			end
+			vim.b.editHex = false
+			-- Filter the buffer back through xxd reverse
+			vim.cmd("%!xxd -r")
+			end
+			-- Restore state
+			vim.bo.modified = modified
+			vim.bo.readonly = old_readonly
+			vim.bo.modifiable = old_modifiable
+			end
 	'';
 }

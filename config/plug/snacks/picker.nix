@@ -32,26 +32,20 @@ in
 		};
 		layouts.default.__raw = ''
 		{
-		    reverse = true,
-		    layout = {
-			box = "horizontal",
-			backdrop = true,
-			width = 0.8,
-			height = 0.9,
-			border = "none",
-			{
-			    box = "vertical",
-			    { win = "list", title = " Results ", title_pos = "center", border = "rounded" },
-			    { win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+			layout = {
+				backdrop = false,
+				width = 0.5,
+				min_width = 80,
+				height = 0.8,
+				min_height = 30,
+				box = "vertical",
+				border = true,
+				title = "{title} {live} {flags}",
+				title_pos = "center",
+				{ win = "input", height = 1, border = "bottom" },
+				{ win = "list", border = "none" },
+				{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
 			},
-			{
-			    win = "preview",
-			    title = "{preview:Preview}",
-			    width = 0.45,
-			    border = "rounded",
-			    title_pos = "center",
-			},
-		    },
 		}
 		'';
 	    };
