@@ -6,7 +6,6 @@
 
 	plugins = {
 		blink-cmp-dictionary.enable = true;
-		blink-cmp-spell.enable = true;
 		blink-cmp-git.enable = true;
 		blink-emoji.enable = true;
 		blink-ripgrep.enable = true;
@@ -35,7 +34,7 @@
 					default = [
 						"lsp" "buffer" "path" "snippets"
 						# Community
-						"dictionary" "emoji" "git" "spell" "ripgrep"
+						"dictionary" "emoji" "git" "ripgrep"
 					];
 					providers = {
 						lsp = {
@@ -79,12 +78,6 @@
 									git_lab = { };
 								};
 							};
-						};
-						spell = {
-							name = "Spell";
-							enabled = true;
-							module = "blink-cmp-spell";
-							score_offset = 5;
 						};
 						emoji = {
 							name = "Emoji";
